@@ -44,19 +44,19 @@ getData(inputText);
 })
 function navClick(navName){
   if(navName =="politics"){
-    document.getElementById("politics").style.color="rgb(o,140,255)"
+    document.getElementById("politics").style.color="rgb(0,140,255)"
     document.getElementById("sports").style.color="white"
     document.getElementById("technology").style.color="white"
   }
   if(navName =="sports"){
     document.getElementById("politics").style.color="white"
-    document.getElementById("sports").style.color="rgb(o,140,255)"
+    document.getElementById("sports").style.color="rgb(0,140,255)"
     document.getElementById("technology").style.color="white"
   }
   if(navName =="technology"){
     document.getElementById("politics").style.color="white"
     document.getElementById("sports").style.color="white"
-    document.getElementById("technology").style.color="rgb(o,140,255)"
+    document.getElementById("technology").style.color="rgb(0,140,255)"
   }
   getData(navName);
 }
