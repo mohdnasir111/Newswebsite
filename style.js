@@ -37,11 +37,11 @@ const getData = async(input) => {
 }
 window.addEventListener("load", function(){
   getData('india');
-})
+});
 SearchBtn.addEventListener("click", function(){
 let inputText = inputData.value;
 getData(inputText);
-})
+});
 function navClick(navName){
   if(navName =="politics"){
     document.getElementById("politics").style.color="rgb(0,140,255)"
