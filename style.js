@@ -26,7 +26,6 @@ const getData = async(input) => {
       window.open(article.url);
     })
    
-};
   /*let divs = document.createElement("div");
   divs.classList.add("card");
   cardData.appendChild(divs);
