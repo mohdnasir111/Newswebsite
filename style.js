@@ -60,4 +60,3 @@ function navClick(navName){
     document.getElementById("technology").style.color="rgb(0,140,255)"
   }
  getData(navName); 
-}
