@@ -4,63 +4,59 @@ let SearchBtn = document.getElementById("searchBtn");
 let inputData = document.getElementById("inputData");
 let searchType = document.getElementById("type");
 
-const getData = async (input) => {
-  try {
-    const res = await fetch(`https://newsapi.org/v2/everything?q=${input}&apiKey=${key}`);
-    if (!res.ok) {
-      throw new Error(`API request failed with status ${res.status}`);
-    }
-    const jsonData = await res.json();
 
-    if (!jsonData || !jsonData.articles || jsonData.articles.length === 0) {
-      cardData.innerHTML = "No articles found.";
-      return;
-    }
-
-    cardData.innerHTML = "";
-    jsonData.articles.forEach(article => {
-      const div = document.createElement("div");
-      div.classList.add("card");
-      div.innerHTML = `
-        <img src="${article.urlToImage}" alt="">
+const getData = async(input) => {
+  let res = await fetch(`https://newsapi.org/v2/everything?q=${input}&apiKey=${key}`
+  );
+  let jsonData = await res.json();
+  console.log(jsonData.articles);
+  cardData.innerHTML="";
+  jsonData.articles.forEach(function(article){
+    console.log(article);
+    let divs = document.createElement("div");
+  divs.classList.add("card");
+  cardData.appendChild(divs);
+  searchType.innerHTML="Search:"+input;
+ divs.innerHTML=`
+ <img src="${article.urlToImage}" alt="">
         <h3>${article.title}</h3>
         <p>${article.description}</p>
-      `};
-      div.addEventListener("click", () => {
-        window.open(article.url);
-      });
-      cardData.appendChild(div);
-    });
-
-    searchType.innerHTML = "Search: " + input;
-  }/* catch (error) {
-    console.error("Error fetching data:", error);
-    cardData.innerHTML = "An error occurred while fetching data.";
+        `
+    divs.addEventListener("click",function(){
+      window.open(article.url);
+    })
+  })
+  /*let divs = document.createElement("div");
+  divs.classList.add("card");
+  cardData.appendChild(divs);
+ divs.innerHTML=`
+ <img src="${jsonData.articles[0].urlToImage}" alt="">
+        <h3>${jsonData.articles[0].title}</h3>
+        <p>${jsonData.articles[0].description}</p>
+        `*/
+};
+window.addEventListener("load", function(){
+  getData('india');
+})
+SearchBtn.addEventListener("click", function(){
+let inputText = inputData.value;
+getData(inputText);
+})
+function navClick(navName){
+  if(navName =="politics"){
+    document.getElementById("politics").style.color="rgb(0,140,255)"
+    document.getElementById("sports").style.color="white"
+    document.getElementById("technology").style.color="white"
   }
-};*/
-
-window.addEventListener("load", function() {
-  getData("Cricket");
-});
-
-SearchBtn.addEventListener("click", function() {
-  const inputText = inputData.value;
-  getData(inputText);
-});
-
-function navClick(navName) {
-  if (navName === "politics") {
-    document.getElementById("politics").style.color = "rgb(0,140,255)";
-    document.getElementById("sports").style.color = "white";
-    document.getElementById("technology").style.color = "white";
-  } else if (navName === "sports") {
-    document.getElementById("politics").style.color = "white";
-    document.getElementById("sports").style.color = "rgb(0,140,255)";
-    document.getElementById("technology").style.color = "white";
-  } else if (navName === "technology") {
-    document.getElementById("politics").style.color = "white";
-    document.getElementById("sports").style.color = "white";
-    document.getElementById("technology").style.color = "rgb(0,140,255)";
+  if(navName =="sports"){
+    document.getElementById("politics").style.color="white"
+    document.getElementById("sports").style.color="rgb(0,140,255)"
+    document.getElementById("technology").style.color="white"
   }
-  getData(navName);
+  if(navName =="technology"){
+    document.getElementById("politics").style.color="white"
+    document.getElementById("sports").style.color="white"
+    document.getElementById("technology").style.color="rgb(0,140,255)"
+  }
+ getData(navName); 
 }
