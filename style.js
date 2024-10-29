@@ -33,11 +33,11 @@ const getData = async (input) => {
     });
 
     searchType.innerHTML = "Search: " + input;
-  } catch (error) {
+  }/* catch (error) {
     console.error("Error fetching data:", error);
     cardData.innerHTML = "An error occurred while fetching data.";
   }
-};
+};*/
 
 window.addEventListener("load", function() {
   getData("Cricket");
