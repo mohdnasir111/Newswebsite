@@ -24,7 +24,7 @@ const getData = async(input) => {
         `
     divs.addEventListener("click",function(){
       window.open(article.url);
-    });
+    })
   
   /*let divs = document.createElement("div");
   divs.classList.add("card");
