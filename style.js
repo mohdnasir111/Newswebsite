@@ -37,6 +37,7 @@ const getData = async(input) => {
 window.addEventListener("load", function(){
   getData('india');
 })
+  }
 SearchBtn.addEventListener("click", function(){
 let inputText = inputData.value;
 getData(inputText);
