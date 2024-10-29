@@ -34,7 +34,6 @@ const getData = async(input) => {
         <h3>${jsonData.articles[0].title}</h3>
         <p>${jsonData.articles[0].description}</p>
         `*/
-)};
 window.addEventListener("load", function(){
   getData('india');
 })
