@@ -25,7 +25,7 @@ const getData = async(input) => {
     divs.addEventListener("click",function(){
       window.open(article.url);
     })
-   
+})
   /*let divs = document.createElement("div");
   divs.classList.add("card");
   cardData.appendChild(divs);
@@ -34,10 +34,10 @@ const getData = async(input) => {
         <h3>${jsonData.articles[0].title}</h3>
         <p>${jsonData.articles[0].description}</p>
         `*/
+}
 window.addEventListener("load", function(){
   getData('india');
 })
-  }
 SearchBtn.addEventListener("click", function(){
 let inputText = inputData.value;
 getData(inputText);
@@ -59,3 +59,4 @@ function navClick(navName){
     document.getElementById("technology").style.color="rgb(0,140,255)"
   }
  getData(navName); 
+}
