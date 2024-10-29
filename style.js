@@ -25,7 +25,7 @@ const getData = async (input) => {
         <img src="${article.urlToImage}" alt="">
         <h3>${article.title}</h3>
         <p>${article.description}</p>
-      `;
+      `};
       div.addEventListener("click", () => {
         window.open(article.url);
       });
