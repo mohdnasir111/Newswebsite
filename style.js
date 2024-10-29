@@ -11,7 +11,7 @@ const getData = async(input) => {
   let jsonData = await res.json();
   console.log(jsonData.articles);
   cardData.innerHTML="";
-  jsonData.articles.Foreach(function(article){
+  jsonData.articles.(function(article){
     console.log(article);
     let divs = document.createElement("div");
   divs.classList.add("card");
