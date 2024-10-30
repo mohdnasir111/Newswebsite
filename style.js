@@ -4,51 +4,73 @@ let SearchBtn = document.getElementById("searchBtn");
 let inputData = document.getElementById("inputData");
 let searchType = document.getElementById("type");
 
+const getData = async (input) => {
+  try {
+    // Fetch data from the API
+    let res = await fetch(`https://newsapi.org/v2/everything?q=${input}&apiKey=${key}`);
+    
+    // Check if the response is okay
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    
+    let jsonData = await res.json();
+    console.log(jsonData); // Log the complete response for debugging
 
-const getData = async(input) => {
-  let res = await fetch(`https://newsapi.org/v2/everything?q=${input}&apiKey=${key}`
-  );
-  let jsonData = await res.json();
-  console.log(jsonData.articles);
-  cardData.innerHTML="";
-  jsonData.articles.forEach(function(article){
-    console.log(article);
-    let divs = document.createElement("div");
-  divs.classList.add("card");
-  cardData.appendChild(divs);
-  searchType.innerHTML="Search:"+input;
- divs.innerHTML=`
- <img src="${article.urlToImage}" alt="">
-        <h3>${article.title}</h3>
-        <p>${article.description}</p>
-        `
-    divs.addEventListener("click",function(){
-      window.open(article.url);
-    })
-});
-}
-window.addEventListener("load", function(){
-  getData('india');
-});
-SearchBtn.addEventListener("click", function(){
-let inputText = inputData.value;
-getData(inputText);
-});
-function navClick(navName){
-  if(navName =="politics"){
-    document.getElementById("politics").style.color="rgb(0,140,255)"
-    document.getElementById("sports").style.color="white"
-    document.getElementById("technology").style.color="white"
+    // Check if articles exist in the response
+    if (jsonData.articles && jsonData.articles.length > 0) {
+      cardData.innerHTML = ""; // Clear previous content
+      
+      jsonData.articles.forEach((article) => {
+        console.log(article); // Log each article for debugging
+        
+        // Create a card for each article
+        let divs = document.createElement("div");
+        divs.classList.add("card");
+        
+        divs.innerHTML = `
+          <img src="${article.urlToImage || 'default-image.jpg'}" alt="Article Image">
+          <h3>${article.title || 'No Title Available'}</h3>
+          <p>${article.description || 'No Description Available'}</p>
+        `;
+        
+        // Open article link on click
+        divs.addEventListener("click", () => {
+          window.open(article.url);
+        });
+        
+        cardData.appendChild(divs);
+      });
+      
+      searchType.innerHTML = "Search: " + input;
+    } else {
+      // Handle case where no articles are found
+      cardData.innerHTML = "No articles found for this search term.";
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    cardData.innerHTML = "An error occurred while fetching data. Please try again later.";
   }
-  if(navName =="sports"){
-    document.getElementById("politics").style.color="white"
-    document.getElementById("sports").style.color="rgb(0,140,255)"
-    document.getElementById("technology").style.color="white"
-  }
-  if(navName =="technology"){
-    document.getElementById("politics").style.color="white"
-    document.getElementById("sports").style.color="white"
-    document.getElementById("technology").style.color="rgb(0,140,255)"
-  }
- getData(navName); 
+};
+
+// Initial data fetch on page load
+window.addEventListener("load", () => {
+  getData("india");
+});
+
+// Search button click event
+SearchBtn.addEventListener("click", () => {
+  let inputText = inputData.value;
+  getData(inputText);
+});
+
+// Navigation click handler
+function navClick(navName) {
+  // Highlight selected category
+  ["politics", "sports", "technology"].forEach((category) => {
+    document.getElementById(category).style.color = category === navName ? "rgb(0,140,255)" : "white";
+  });
+
+  // Fetch data based on category
+  getData(navName);
 }
