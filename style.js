@@ -25,15 +25,7 @@ const getData = async(input) => {
     divs.addEventListener("click",function(){
       window.open(article.url);
     })
-})
-  /*let divs = document.createElement("div");
-  divs.classList.add("card");
-  cardData.appendChild(divs);
- divs.innerHTML=`
- <img src="${jsonData.articles[0].urlToImage}" alt="">
-        <h3>${jsonData.articles[0].title}</h3>
-        <p>${jsonData.articles[0].description}</p>
-        `*/
+});
 }
 window.addEventListener("load", function(){
   getData('india');
